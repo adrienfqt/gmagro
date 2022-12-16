@@ -7,13 +7,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class DaoActivite {
     private static DaoActivite instance = null;
 
     private List<Activite>activites = new ArrayList<Activite>();
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
     public List<Activite> getActivitesLocales(){
         return activites;
@@ -30,7 +33,7 @@ public class DaoActivite {
     }
 
     public void getActivites(DelegateAsyncTask delegate) {
-        String url = "action=connexion";
+        String url = "action=getActivites";
         WSConnexionHTTPS wsConnexionHTTPS = new WSConnexionHTTPS() {
             @Override
             protected void onPostExecute(String s) {
