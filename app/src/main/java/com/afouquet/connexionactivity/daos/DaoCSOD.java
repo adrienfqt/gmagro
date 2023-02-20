@@ -3,6 +3,7 @@ package com.afouquet.connexionactivity.daos;
 import com.afouquet.connexionactivity.bean.CauseDefaut;
 import com.afouquet.connexionactivity.bean.CauseObjet;
 import com.afouquet.connexionactivity.bean.Intervention;
+import com.afouquet.connexionactivity.bean.SymptomeDefaut;
 import com.afouquet.connexionactivity.net.WSConnexionHTTPS;
 
 import org.json.JSONArray;
@@ -16,6 +17,7 @@ public class DaoCSOD {
 
     private List<CauseDefaut> causesDefauts = new ArrayList<CauseDefaut>();
     private List<CauseObjet> causeObjets = new ArrayList<CauseObjet>();
+    private List<SymptomeDefaut> symptomeDefauts = new ArrayList<SymptomeDefaut>();
     private static DaoCSOD instance = null;
     private DaoCSOD(){}
 
@@ -31,6 +33,9 @@ public class DaoCSOD {
     }
     public  List<CauseObjet> getCausesObjetsLocales(){
         return causeObjets;
+    }
+    public  List<SymptomeDefaut> getSymptomeDefautsLocales(){
+        return symptomeDefauts;
     }
 
 
