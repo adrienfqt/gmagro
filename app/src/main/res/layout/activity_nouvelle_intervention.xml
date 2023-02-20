@@ -8,8 +8,8 @@
 
     <Spinner
         android:id="@+id/spinnerActiviteNvelle"
-        android:layout_width="124dp"
-        android:layout_height="27dp"
+        android:layout_width="156dp"
+        android:layout_height="25dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,40 +17,50 @@
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Spinner
+        android:id="@+id/spinnerHDebutNvelle"
+        android:layout_width="177dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <Spinner
         android:id="@+id/spinnerMachineNvelle"
         android:layout_width="188dp"
         android:layout_height="29dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerActiviteNvelle"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Spinner
         android:id="@+id/spinnerCDefautNvelle"
-        android:layout_width="145dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="198dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerMachineNvelle"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/spinnerCObjetNvelle"
-        android:layout_width="118dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="36dp"
+        android:layout_width="114dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="28dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTime"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerHDebutNvelle"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/spinnerSDefautNvelle"
         android:layout_width="148dp"
         android:layout_height="30dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCDefautNvelle"
@@ -60,8 +70,8 @@
         android:id="@+id/spinnerSObjetNvelle"
         android:layout_width="139dp"
         android:layout_height="33dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCObjetNvelle"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
@@ -75,31 +85,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerSDefautNvelle" />
-
-    <EditText
-        android:id="@+id/editTime"
-        android:layout_width="77dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="36dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.235"
-        app:layout_constraintStart_toEndOf="@+id/spinnerActiviteNvelle"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-    <Button
-        android:id="@+id/buttonTime"
-        android:layout_width="110dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="36dp"
-        android:text="heure"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.569"
-        app:layout_constraintStart_toEndOf="@+id/editTime"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TouchTargetSizeCheck" />
-    tools:layout_editor_absoluteX="68dp"
-        tools:layout_editor_absoluteY="430dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
