@@ -1,11 +1,11 @@
 package com.afouquet.connexionactivity.bean;
 
-public class CauseDefaut {
+public class CauseObjet {
     private String code;
     private String libelle;
     private String uai;
 
-    public CauseDefaut(String code, String libelle, String uai) {
+    public CauseObjet(String code, String libelle, String uai) {
         this.code = code;
         this.libelle = libelle;
         this.uai = uai;

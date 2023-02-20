@@ -1,6 +1,7 @@
 package com.afouquet.connexionactivity.daos;
 
 import com.afouquet.connexionactivity.bean.CauseDefaut;
+import com.afouquet.connexionactivity.bean.CauseObjet;
 import com.afouquet.connexionactivity.bean.Intervention;
 import com.afouquet.connexionactivity.net.WSConnexionHTTPS;
 
@@ -14,6 +15,7 @@ import java.util.List;
 public class DaoCSOD {
 
     private List<CauseDefaut> causesDefauts = new ArrayList<CauseDefaut>();
+    private List<CauseObjet> causeObjets = new ArrayList<CauseObjet>();
     private static DaoCSOD instance = null;
     private DaoCSOD(){}
 
@@ -26,6 +28,9 @@ public class DaoCSOD {
 
     public  List<CauseDefaut> getCausesDefautsLocales(){
         return causesDefauts;
+    }
+    public  List<CauseObjet> getCausesObjetsLocales(){
+        return causeObjets;
     }
 
 
@@ -62,5 +67,38 @@ public class DaoCSOD {
         }
     }
 
+
+    public void getCo(DelegateAsyncTask delegate) {
+        String url = "action=getCo";
+        WSConnexionHTTPS wsConnexionHTTPS = new WSConnexionHTTPS() {
+            @Override
+            protected void onPostExecute(String s) {
+                traiterRetourgetCo(s, delegate);
+            }
+        };
+        wsConnexionHTTPS.execute(url);
+    }
+
+    private void traiterRetourgetCo(String s, DelegateAsyncTask delegate) {
+
+        try {
+            causeObjets.clear();
+            JSONObject jo = new JSONObject(s);
+            if(jo.getBoolean("success")){
+                JSONArray ja = jo.getJSONArray("causes_objets");
+                for (int i = 0; i < ja.length(); i++) {
+                    JSONObject coJson = ja.getJSONObject(i);
+                    String code = coJson.getString("code");
+                    String libelle = coJson.getString("libelle");
+                    String uai = coJson.getString("site_uai");
+                    CauseObjet co= new CauseObjet(code,libelle,uai);
+                    causeObjets.add(co);
+                }
+            }
+            delegate.whenWSConnexionIsTerminated(causesDefauts.isEmpty());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

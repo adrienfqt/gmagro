@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.afouquet.connexionactivity.bean.Activite;
 import com.afouquet.connexionactivity.bean.CauseDefaut;
+import com.afouquet.connexionactivity.bean.CauseObjet;
 import com.afouquet.connexionactivity.bean.Machine;
 import com.afouquet.connexionactivity.daos.DaoActivite;
 import com.afouquet.connexionactivity.daos.DaoCSOD;
@@ -95,7 +96,7 @@ public class NouvelleIntervention extends AppCompatActivity {
         ArrayAdapter<CauseDefaut> adapterCd = new ArrayAdapter<CauseDefaut>(NouvelleIntervention.this,
                 android.R.layout.simple_spinner_item, DaoCSOD.getInstance().getCausesDefautsLocales());
         adapterCd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ((Spinner) findViewById(R.id.spinnerCDefautNvelle)).setAdapter(adapterActivite);
+        ((Spinner) findViewById(R.id.spinnerCDefautNvelle)).setAdapter(adapterCd);
 
         DaoCSOD.getInstance().getCd(new DelegateAsyncTask() {
             @Override
@@ -108,6 +109,21 @@ public class NouvelleIntervention extends AppCompatActivity {
             }
         });
 
+        //CAUSES OBJETSS
+        ArrayAdapter<CauseObjet> adapterCo = new ArrayAdapter<CauseObjet>(NouvelleIntervention.this,
+                android.R.layout.simple_spinner_item, DaoCSOD.getInstance().getCausesObjetsLocales());
+        adapterCo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ((Spinner) findViewById(R.id.spinnerCObjetNvelle)).setAdapter(adapterCo);
+        DaoCSOD.getInstance().getCo(new DelegateAsyncTask() {
+            @Override
+            public void whenWSConnexionIsTerminated(Object result) {
+                if((boolean) result){
+                    Toast.makeText(NouvelleIntervention.this,"liste causes objets vide",Toast.LENGTH_LONG).show();
+                }else{
+                    adapterCo.notifyDataSetChanged();
+                }
+            }
+        });
 
     }
 }
