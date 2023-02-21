@@ -2,9 +2,11 @@ package com.afouquet.connexionactivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -13,20 +15,27 @@ import android.widget.Toast;
 import com.afouquet.connexionactivity.bean.Activite;
 import com.afouquet.connexionactivity.bean.CauseDefaut;
 import com.afouquet.connexionactivity.bean.CauseObjet;
+import com.afouquet.connexionactivity.bean.Intervenant;
+import com.afouquet.connexionactivity.bean.IntervenantTps;
 import com.afouquet.connexionactivity.bean.Machine;
 import com.afouquet.connexionactivity.bean.SymptomeDefaut;
+import com.afouquet.connexionactivity.bean.SymptomeObjet;
 import com.afouquet.connexionactivity.daos.DaoActivite;
 import com.afouquet.connexionactivity.daos.DaoCSOD;
+import com.afouquet.connexionactivity.daos.DaoIntervenant;
 import com.afouquet.connexionactivity.daos.DaoIntervention;
 import com.afouquet.connexionactivity.daos.DelegateAsyncTask;
 import android.app.TimePickerDialog;
 import android.widget.TimePicker;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class NouvelleIntervention extends AppCompatActivity {
 
     private int mYear, mMonth, mDay, mHour, mMinute;
+    private List<IntervenantTps> listIntervenantTps = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +102,31 @@ public class NouvelleIntervention extends AppCompatActivity {
 
         });
 
+        //DATE PICKERRRRR
+        findViewById(R.id.buttonDateNvelle).setOnClickListener((View view)->{
+            final Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+
+                            ((EditText)findViewById(R.id.editDateNvelle)).setText(dayOfMonth+"/"+monthOfYear+"/"+year);
+
+                        }
+                    },
+                    // on below line we are passing year,
+                    // month and day for selected date in our date picker.
+                    mYear, mMonth, mDay);
+            // at last we are calling show to
+            // display our date picker dialog.
+            datePickerDialog.show();
+        });
+
+
         //CAUSES DEFAUUUUTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
         ArrayAdapter<CauseDefaut> adapterCd = new ArrayAdapter<CauseDefaut>(NouvelleIntervention.this,
                 android.R.layout.simple_spinner_item, DaoCSOD.getInstance().getCausesDefautsLocales());
@@ -130,14 +164,49 @@ public class NouvelleIntervention extends AppCompatActivity {
         ArrayAdapter<SymptomeDefaut> adapterSd = new ArrayAdapter<SymptomeDefaut>(NouvelleIntervention.this,
                 android.R.layout.simple_spinner_item, DaoCSOD.getInstance().getSymptomeDefautsLocales());
         adapterSd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ((Spinner) findViewById(R.id.spinnerCObjetNvelle)).setAdapter(adapterSd);
-        DaoCSOD.getInstance().getCo(new DelegateAsyncTask() {
+        ((Spinner) findViewById(R.id.spinnerSDefautNvelle)).setAdapter(adapterSd);
+        DaoCSOD.getInstance().getSd(new DelegateAsyncTask() {
             @Override
             public void whenWSConnexionIsTerminated(Object result) {
                 if((boolean) result){
-                    Toast.makeText(NouvelleIntervention.this,"liste causes objets vide",Toast.LENGTH_LONG).show();
+                    Toast.makeText(NouvelleIntervention.this,"liste symptomes défauts vide",Toast.LENGTH_LONG).show();
                 }else{
                     adapterSd.notifyDataSetChanged();
+                }
+            }
+        });
+
+        //Symptômes objets
+        ArrayAdapter<SymptomeObjet> adapterSo = new ArrayAdapter<SymptomeObjet>(NouvelleIntervention.this,
+                android.R.layout.simple_spinner_item, DaoCSOD.getInstance().getSymptomeObjetsLocales());
+        adapterSo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ((Spinner) findViewById(R.id.spinnerSObjetNvelle)).setAdapter(adapterSo);
+        DaoCSOD.getInstance().getSo(new DelegateAsyncTask() {
+            @Override
+            public void whenWSConnexionIsTerminated(Object result) {
+                if((boolean) result){
+                    Toast.makeText(NouvelleIntervention.this,"liste Symptomes objets vide",Toast.LENGTH_LONG).show();
+                }else{
+                    adapterSo.notifyDataSetChanged();
+                }
+            }
+        });
+
+        // SPINNER Intervenants////////////////////////////////////////////////////////////////////////////
+
+        ArrayAdapter<Intervenant> adapterIntervenant = new ArrayAdapter<Intervenant>(this,
+                android.R.layout.simple_spinner_item, DaoIntervenant.getInstance().getIntervSiteLocals());
+
+        adapterIntervenant.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ((Spinner) findViewById(R.id.spinnerIntervNvelle)).setAdapter(adapterIntervenant);
+
+        DaoIntervenant.getInstance().getIntervSite(new DelegateAsyncTask() {
+            @Override
+            public void whenWSConnexionIsTerminated(Object result) {
+                if((boolean) result){
+                    Toast.makeText(NouvelleIntervention.this,"liste intervenants site vide",Toast.LENGTH_LONG).show();
+                }else{
+                    adapterIntervenant.notifyDataSetChanged();
                 }
             }
         });
