@@ -3,11 +3,14 @@ package com.afouquet.connexionactivity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
@@ -210,6 +213,32 @@ public class NouvelleIntervention extends AppCompatActivity {
                 }
             }
         });
+
+
+        //Ajout Intervenant TPS
+        ArrayAdapter<IntervenantTps> adapterItps = new ArrayAdapter<IntervenantTps>(NouvelleIntervention.this,
+                android.R.layout.simple_list_item_1, this.listIntervenantTps);
+        ((ListView)(findViewById(R.id.lvintervNvelle))).setAdapter(adapterItps);
+
+        findViewById(R.id.buttonAddIntervnvelle).setOnClickListener((View view)->{
+            Intervenant inter = (Intervenant) ((Spinner)findViewById(R.id.spinnerIntervNvelle)).getSelectedItem();
+            String leTemps= (String) ((Spinner)findViewById(R.id.spinnerTempsNvelle)).getSelectedItem();
+            IntervenantTps itps= new IntervenantTps(inter,leTemps);
+            listIntervenantTps.add(itps);
+            adapterItps.notifyDataSetChanged();
+            DaoIntervenant.getInstance().getIntervSiteLocals().remove(inter);
+            adapterIntervenant.notifyDataSetChanged();
+        });
+
+        ((ListView)findViewById(R.id.lvintervNvelle)).setOnItemLongClickListener((parent, view, position, id) -> {
+            IntervenantTps s = (IntervenantTps) adapterItps.getItem(position);
+            listIntervenantTps.remove(s);
+            adapterItps.notifyDataSetChanged();
+            DaoIntervenant.getInstance().getIntervSiteLocals().add(s.getIntervenant());
+            adapterIntervenant.notifyDataSetChanged();
+            return true;
+        });
+
 
     }
 }

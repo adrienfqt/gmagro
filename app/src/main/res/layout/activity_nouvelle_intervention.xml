@@ -265,7 +265,7 @@
         <ListView
             android:id="@+id/lvintervNvelle"
             android:layout_width="288dp"
-            android:layout_height="86dp"
+            android:layout_height="125dp"
             android:layout_marginTop="12dp"
             android:nestedScrollingEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -289,6 +289,7 @@
             android:layout_height="41dp"
             android:layout_marginStart="48dp"
             android:layout_marginTop="36dp"
+            android:entries="@array/spinnerItemsDuree"
             app:layout_constraintStart_toEndOf="@+id/spinnerIntervNvelle"
             app:layout_constraintTop_toBottomOf="@+id/lvintervNvelle"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -303,6 +304,26 @@
             app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerIntervNvelle" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginBottom="4dp"
+            android:text="Intervenants"
+            app:layout_constraintBottom_toTopOf="@+id/spinnerIntervNvelle"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="8dp"
+            android:text="Temps passé"
+            app:layout_constraintBottom_toTopOf="@+id/spinnerTempsNvelle"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,9 +4,9 @@ import java.sql.Time;
 
 public class IntervenantTps {
     private Intervenant intervenant;
-    private Time tps;
+    private String tps;
 
-    public IntervenantTps(Intervenant intervenant, Time tps) {
+    public IntervenantTps(Intervenant intervenant, String tps) {
         this.intervenant = intervenant;
         this.tps = tps;
     }
@@ -15,7 +15,7 @@ public class IntervenantTps {
         return intervenant;
     }
 
-    public Time getTps() {
+    public String getTps() {
         return tps;
     }
 
