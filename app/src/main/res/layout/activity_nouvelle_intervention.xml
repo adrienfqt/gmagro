@@ -139,10 +139,10 @@
             android:id="@+id/cbArretMachineNvelle"
             android:layout_width="236dp"
             android:layout_height="33dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="112dp"
             android:text="cbArretMachineNvelle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.285"
+            app:layout_constraintHorizontal_bias="0.274"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkInterTermineeNvelle"
             tools:ignore="TouchTargetSizeCheck" />
@@ -151,7 +151,7 @@
             android:id="@+id/cbChangOrganeNvelle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="112dp"
             android:text="Changement d'organe"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.206"
@@ -162,10 +162,10 @@
             android:id="@+id/cbPertesNvelle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="108dp"
             android:text="Pertes"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.394"
+            app:layout_constraintHorizontal_bias="0.411"
             app:layout_constraintStart_toEndOf="@+id/cbChangOrganeNvelle"
             app:layout_constraintTop_toBottomOf="@+id/cbArretMachineNvelle" />
 
@@ -324,6 +324,57 @@
             android:text="Temps passé"
             app:layout_constraintBottom_toTopOf="@+id/spinnerTempsNvelle"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/buttonHeureTerminNvelle"
+            android:layout_width="110dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="12dp"
+            android:text="Heure"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkInterTermineeNvelle"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <EditText
+            android:id="@+id/editHeureTermineNvelle"
+            android:layout_width="77dp"
+            android:layout_height="41dp"
+            android:ems="10"
+            android:hint="Heure"
+            android:inputType="textPersonName"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/buttonHeureTerminNvelle"
+            app:layout_constraintTop_toTopOf="@+id/buttonHeureTerminNvelle"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/buttonDateTermineNvelle"
+            android:layout_width="110dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="20dp"
+            android:text="Date"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonHeureTerminNvelle"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <EditText
+            android:id="@+id/editDateTermineNvelle"
+            android:layout_width="77dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="Date"
+            android:inputType="textPersonName"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@+id/buttonDateTermineNvelle"
+            app:layout_constraintTop_toBottomOf="@+id/editHeureTermineNvelle"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

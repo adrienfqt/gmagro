@@ -21,6 +21,6 @@ public class IntervenantTps {
 
     @Override
     public String toString() {
-        return this.intervenant+"("+this.tps+")";
+        return this.intervenant+" ("+this.tps+")";
     }
 }

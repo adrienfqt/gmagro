@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -117,6 +119,7 @@ public class NouvelleIntervention extends AppCompatActivity {
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
 
+                            monthOfYear = monthOfYear +1;
                             ((EditText)findViewById(R.id.editDateNvelle)).setText(dayOfMonth+"/"+monthOfYear+"/"+year);
 
                         }
@@ -230,6 +233,7 @@ public class NouvelleIntervention extends AppCompatActivity {
             adapterIntervenant.notifyDataSetChanged();
         });
 
+        //Supression Intervenant TPS
         ((ListView)findViewById(R.id.lvintervNvelle)).setOnItemLongClickListener((parent, view, position, id) -> {
             IntervenantTps s = (IntervenantTps) adapterItps.getItem(position);
             listIntervenantTps.remove(s);
@@ -240,5 +244,65 @@ public class NouvelleIntervention extends AppCompatActivity {
         });
 
 
+        // VISIBILITE DATE ET HEURE DE LA FIN DE l'INTERVENTION
+        ((CheckBox)(findViewById(R.id.checkInterTermineeNvelle))).setOnClickListener((View v) ->{
+            if (((CheckBox)(findViewById(R.id.checkInterTermineeNvelle))).isChecked()){
+                ((Button)findViewById(R.id.buttonHeureTerminNvelle)).setVisibility(View.VISIBLE);
+                ((Button)findViewById(R.id.buttonDateTermineNvelle)).setVisibility(View.VISIBLE);
+                ((EditText)findViewById(R.id.editHeureTermineNvelle)).setVisibility(View.VISIBLE);
+                ((EditText)findViewById(R.id.editDateTermineNvelle)).setVisibility(View.VISIBLE);
+            }else{
+                ((Button)findViewById(R.id.buttonHeureTerminNvelle)).setVisibility(View.INVISIBLE);
+                ((Button)findViewById(R.id.buttonDateTermineNvelle)).setVisibility(View.INVISIBLE);
+                ((EditText)findViewById(R.id.editHeureTermineNvelle)).setVisibility(View.INVISIBLE);
+                ((EditText)findViewById(R.id.editDateTermineNvelle)).setVisibility(View.INVISIBLE);
+            }
+        });
+
+
+        //DATE PICKER INTERVENTION TERMINEE
+        findViewById(R.id.buttonDateTermineNvelle).setOnClickListener((View view)->{
+            final Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year,
+                                      int monthOfYear, int dayOfMonth) {
+
+                    monthOfYear = monthOfYear +1;
+                    ((EditText)findViewById(R.id.editDateTermineNvelle)).setText(dayOfMonth+"/"+monthOfYear+"/"+year);
+
+                }
+            },
+                    // on below line we are passing year,
+                    // month and day for selected date in our date picker.
+                    mYear, mMonth, mDay);
+            // at last we are calling show to
+            // display our date picker dialog.
+            datePickerDialog.show();
+        });
+
+        //TIME PICKER INTERVENTION TERMINEE
+        findViewById(R.id.buttonHeureTerminNvelle).setOnClickListener((View view)->{
+            final Calendar c = Calendar.getInstance();
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                    new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+
+                            ((EditText)findViewById(R.id.editHeureTermineNvelle)).setText(hourOfDay + ":" + minute);
+                        }
+                    }, mHour, mMinute, true);
+            timePickerDialog.show();
+
+        });
     }
 }
