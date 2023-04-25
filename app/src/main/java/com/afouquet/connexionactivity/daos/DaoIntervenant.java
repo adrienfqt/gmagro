@@ -102,7 +102,8 @@ public class DaoIntervenant {
                     JSONObject coJson = ja.getJSONObject(i);
                     String nom = coJson.getString("nom");
                     String prenom = coJson.getString("prenom");
-                    Intervenant in = new Intervenant(nom,prenom);
+                    String mail = coJson.getString("mail");
+                    Intervenant in = new Intervenant(nom,prenom,mail);
                     intervenants.add(in);
                 }
             }

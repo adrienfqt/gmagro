@@ -1,9 +1,11 @@
 package com.afouquet.connexionactivity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -52,7 +54,22 @@ public class AccueilInterv extends AppCompatActivity {
 
         findViewById(R.id.buttonNouvelleInterAccueil).setOnClickListener((View view)->{
                 Intent leIntent = new Intent(AccueilInterv.this,NouvelleIntervention.class);
-                startActivity(leIntent);
+                startActivityForResult(leIntent,1);
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            DaoIntervention.getInstance().getIntervention(new DelegateAsyncTask() {
+                @Override
+                public void whenWSConnexionIsTerminated(Object result) {
+                    arrayAdapterIntervention.notifyDataSetChanged();
+
+                }
+            });
+        }
     }
 }

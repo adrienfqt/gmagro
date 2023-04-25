@@ -120,7 +120,7 @@ public class NouvelleIntervention extends AppCompatActivity {
                                               int monthOfYear, int dayOfMonth) {
 
                             monthOfYear = monthOfYear +1;
-                            ((EditText)findViewById(R.id.editDateNvelle)).setText(dayOfMonth+"/"+monthOfYear+"/"+year);
+                            ((EditText)findViewById(R.id.editDateNvelle)).setText(mYear+"/"+monthOfYear+"/"+dayOfMonth);
 
                         }
                     },
@@ -273,7 +273,7 @@ public class NouvelleIntervention extends AppCompatActivity {
                                       int monthOfYear, int dayOfMonth) {
 
                     monthOfYear = monthOfYear +1;
-                    ((EditText)findViewById(R.id.editDateTermineNvelle)).setText(dayOfMonth+"/"+monthOfYear+"/"+year);
+                    ((EditText)findViewById(R.id.editDateTermineNvelle)).setText(mYear+"/"+monthOfYear+"/"+dayOfMonth);
 
                 }
             },
@@ -304,5 +304,128 @@ public class NouvelleIntervention extends AppCompatActivity {
             timePickerDialog.show();
 
         });
+
+        // VISIBILITE DUREE DU TEMPS ARRET
+        ((CheckBox)(findViewById(R.id.cbArretMachineNvelle))).setOnClickListener((View v) ->{
+            if (((CheckBox)(findViewById(R.id.cbArretMachineNvelle))).isChecked()){
+                ((Button)findViewById(R.id.buttonDureeArretNvelle)).setVisibility(View.VISIBLE);
+                ((EditText)findViewById(R.id.editDureeArretNvelle)).setVisibility(View.VISIBLE);
+            }else{
+                ((Button)findViewById(R.id.buttonDureeArretNvelle)).setVisibility(View.INVISIBLE);
+                ((EditText)findViewById(R.id.editDureeArretNvelle)).setVisibility(View.INVISIBLE);
+            }
+        });
+
+
+        //Duree PICKER ARRET MACHINE
+        findViewById(R.id.buttonDureeArretNvelle).setOnClickListener((View view)->{
+            final Calendar c = Calendar.getInstance();
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                    new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+
+                            ((EditText)findViewById(R.id.editDureeArretNvelle)).setText(hourOfDay + ":" + minute);
+                        }
+                    }, mHour, mMinute, true);
+            timePickerDialog.show();
+
+        });
+
+        //ADD INTERVENTION
+        findViewById(R.id.buttonAddIntervention).setOnClickListener((View v)->{
+            String dh_deb= ((EditText)(findViewById(R.id.editDateNvelle))).getText().toString()+" "+((EditText)(findViewById(R.id.editTime))).getText().toString();
+            String dh_fin = null;
+            String commentaire=null;
+            String tpsArret=null;
+            String chOrgane=null;
+            String perte = null;
+            String activite = null;
+            String machine = null;
+            String cd = null;
+            String co = null;
+            String sd = null;
+            String so = null;
+
+            if (!((EditText)(findViewById(R.id.editHeureTermineNvelle))).getText().toString().isEmpty() &&
+                    !((EditText)(findViewById(R.id.editDateTermineNvelle))).getText().toString().isEmpty()){
+                dh_fin = ((EditText)(findViewById(R.id.editDateTermineNvelle))).getText().toString() +" "+((EditText)(findViewById(R.id.editHeureTermineNvelle))).getText().toString();
+            }
+
+            if (!((EditText)(findViewById(R.id.editComNvelle))).getText().toString().isEmpty()){
+                commentaire = ((EditText)(findViewById(R.id.editComNvelle))).getText().toString();
+            }
+
+            if (!((EditText)(findViewById(R.id.editDureeArretNvelle))).getText().toString().isEmpty()){
+                tpsArret = ((EditText)(findViewById(R.id.editDureeArretNvelle))).getText().toString();
+            }
+
+            if (((CheckBox)(findViewById(R.id.cbChangOrganeNvelle))).isChecked()){
+                chOrgane = "1";
+            }else{
+                chOrgane="0";
+            }
+
+            if (((CheckBox)(findViewById(R.id.cbPertesNvelle))).isChecked()){
+                perte = "1";
+            }else{
+                perte="0";
+            }
+
+            if (!((Spinner)(findViewById(R.id.spinnerActiviteNvelle))).getSelectedItem().toString().isEmpty()){
+                activite = ((Spinner)(findViewById(R.id.spinnerActiviteNvelle))).getSelectedItem().toString();
+            }
+
+            if (!((Spinner)(findViewById(R.id.spinnerMachineNvelle))).getSelectedItem().toString().isEmpty()){
+                machine = ((Spinner)(findViewById(R.id.spinnerMachineNvelle))).getSelectedItem().toString();
+            }
+
+            if (!((Spinner)(findViewById(R.id.spinnerCDefautNvelle))).getSelectedItem().toString().isEmpty()){
+                cd = ((CauseDefaut)((Spinner)(findViewById(R.id.spinnerCDefautNvelle))).getSelectedItem()).getCode();
+            }
+
+            if (!((Spinner)(findViewById(R.id.spinnerCObjetNvelle))).getSelectedItem().toString().isEmpty()){
+                co = ((CauseObjet)((Spinner)(findViewById(R.id.spinnerCObjetNvelle))).getSelectedItem()).getCode();
+            }
+
+            if (!((Spinner)(findViewById(R.id.spinnerSDefautNvelle))).getSelectedItem().toString().isEmpty()){
+                sd = ((SymptomeDefaut)((Spinner)(findViewById(R.id.spinnerSDefautNvelle))).getSelectedItem()).getCode();
+            }
+
+            if (!((Spinner)(findViewById(R.id.spinnerSObjetNvelle))).getSelectedItem().toString().isEmpty()){
+                so = ((SymptomeObjet)((Spinner)(findViewById(R.id.spinnerSObjetNvelle))).getSelectedItem()).getCode();
+            }
+
+            DaoIntervention.getInstance().addIntervention(dh_deb,dh_fin,commentaire,tpsArret,chOrgane,perte,activite,machine,cd,co,sd,so,new DelegateAsyncTask() {
+                @Override
+                public void whenWSConnexionIsTerminated(Object result) {
+                    if((boolean) result){
+                        Toast.makeText(NouvelleIntervention.this,"Intervention ajoutée",Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(NouvelleIntervention.this,"ERREUR",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            for (IntervenantTps inter : listIntervenantTps){
+                DaoIntervention.getInstance().addInterventionInter(inter.getIntervenant().getMail(), inter.getTps(), new DelegateAsyncTask() {
+                    @Override
+                    public void whenWSConnexionIsTerminated(Object result) {
+                        if((boolean) result){
+                            setResult(RESULT_OK);
+                            finish();
+                            Toast.makeText(NouvelleIntervention.this,"Tout ajouté",Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(NouvelleIntervention.this,"ERREUR",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+
     }
 }

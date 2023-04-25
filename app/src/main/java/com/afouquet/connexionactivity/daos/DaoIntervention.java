@@ -71,7 +71,10 @@ public class DaoIntervention {
                     boolean organe = interventionJson.getInt("changement_organe") == 1;
                     boolean perte = interventionJson.getInt("perte") == 1;
                     Date creation = formatter.parse(interventionJson.getString("dh_creation"));
-                    Date dMaj = formatter.parse(interventionJson.getString("dh_derniere_maj"));
+                    Date dMaj = null;
+                    if(interventionJson.getString("dh_derniere_maj")!= "null"){
+                        dMaj = formatter.parse(interventionJson.getString("dh_derniere_maj"));
+                    }
                     String mail = interventionJson.getString("intervenant_id");
                     String code = interventionJson.getString("activite_code");
                     String codeMachine = interventionJson.getString("machine_code");
@@ -104,10 +107,10 @@ public class DaoIntervention {
     private void traiterRetourGetMachines(String s, DelegateAsyncTask delegate) {
         try {
 
-            Date dhFab= null;
+            Date dhFab = null;
             machines.clear();
             JSONObject jo = new JSONObject(s);
-            if(jo.getBoolean("success")){
+            if (jo.getBoolean("success")) {
                 JSONArray ja = jo.getJSONArray("machines");
                 for (int i = 0; i < ja.length(); i++) {
                     JSONObject machineObject = ja.getJSONObject(i);
@@ -118,14 +121,67 @@ public class DaoIntervention {
                     String numSerie = machineObject.getString("numero_serie");
                     String uai = machineObject.getString("site_uai");
                     String typeCode = machineObject.getString("type_machine_code");
-                    Machine m = new Machine(code,dhFab,numSerie,uai,typeCode);
+                    Machine m = new Machine(code, dhFab, numSerie, uai, typeCode);
                     machines.add(m);
                 }
-            }delegate.whenWSConnexionIsTerminated(machines.isEmpty());
+            }
+            delegate.whenWSConnexionIsTerminated(machines.isEmpty());
 
         } catch (JSONException | ParseException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public void addIntervention(String dh_deb, String dh_fin, String commentaire, String tpsArret, String chOrgane, String perte, String activite, String machine,
+                                String cd, String co, String sd, String so, DelegateAsyncTask delegate) {
+        String url = "action=addIntervention&dhDeb=" + dh_deb + "&dhFin=" + dh_fin + "&com=" + commentaire + "&tps=" + tpsArret + "&chOrg=" + chOrgane + "&perte="
+                + perte + "&activite=" + activite + "&machine=" + machine + "&cd=" + cd + "&co=" + co + "&sd=" + sd + "&so=" + so;
+        WSConnexionHTTPS wsConnexionHTTPS = new WSConnexionHTTPS() {
+            @Override
+            protected void onPostExecute(String s) {
+                traiterRetouraddIntervention(s, delegate);
+            }
+        };
+        wsConnexionHTTPS.execute(url);
+    }
+
+    private void traiterRetouraddIntervention(String s, DelegateAsyncTask delegate)  {
+        JSONObject jo = null;
+        try {
+            jo = new JSONObject(s);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            delegate.whenWSConnexionIsTerminated((jo.getBoolean("success")));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addInterventionInter(String mail, String tps,DelegateAsyncTask delegate) {
+        String url = "action=addInterventionInterv&intervMail="+mail+"&tps="+tps;
+        WSConnexionHTTPS wsConnexionHTTPS = new WSConnexionHTTPS() {
+            @Override
+            protected void onPostExecute(String s) {
+                traiterRetouraddInterventionInter(s, delegate);
+            }
+        };
+        wsConnexionHTTPS.execute(url);
+    }
+
+    private void traiterRetouraddInterventionInter(String s, DelegateAsyncTask delegate)  {
+        JSONObject jo = null;
+        try {
+            jo = new JSONObject(s);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            delegate.whenWSConnexionIsTerminated((jo.getBoolean("success")));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
