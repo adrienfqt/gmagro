@@ -1,4 +1,4 @@
-package com.afouquet.connexionactivity.bean;
+package com.afouquet.gmagroAndroid.bean;
 
 public class CauseObjet {
     private String code;

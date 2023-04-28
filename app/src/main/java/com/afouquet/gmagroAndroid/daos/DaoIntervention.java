@@ -1,8 +1,8 @@
-package com.afouquet.connexionactivity.daos;
+package com.afouquet.gmagroAndroid.daos;
 
-import com.afouquet.connexionactivity.bean.Intervention;
-import com.afouquet.connexionactivity.bean.Machine;
-import com.afouquet.connexionactivity.net.WSConnexionHTTPS;
+import com.afouquet.gmagroAndroid.bean.Intervention;
+import com.afouquet.gmagroAndroid.bean.Machine;
+import com.afouquet.gmagroAndroid.net.WSConnexionHTTPS;
 
 import org.json.JSONArray;
 import org.json.JSONException;

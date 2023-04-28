@@ -1,4 +1,4 @@
-package com.afouquet.connexionactivity;
+package com.afouquet.gmagroAndroid;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.afouquet.connexionactivity", appContext.getPackageName());
+        assertEquals("com.afouquet.gmagroAndroid", appContext.getPackageName());
     }
 }

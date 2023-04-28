@@ -1,6 +1,4 @@
-package com.afouquet.connexionactivity.bean;
-
-import java.sql.Time;
+package com.afouquet.gmagroAndroid.bean;
 
 public class IntervenantTps {
     private Intervenant intervenant;

@@ -6,7 +6,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.afouquet.connexionactivity"
+        applicationId "com.afouquet.gmagroAndroid"
         minSdk 26
         targetSdk 32
         versionCode 1

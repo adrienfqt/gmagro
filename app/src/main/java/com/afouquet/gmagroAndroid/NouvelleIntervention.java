@@ -1,12 +1,10 @@
-package com.afouquet.connexionactivity;
+package com.afouquet.gmagroAndroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,22 +12,21 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
-import com.afouquet.connexionactivity.bean.Activite;
-import com.afouquet.connexionactivity.bean.CauseDefaut;
-import com.afouquet.connexionactivity.bean.CauseObjet;
-import com.afouquet.connexionactivity.bean.Intervenant;
-import com.afouquet.connexionactivity.bean.IntervenantTps;
-import com.afouquet.connexionactivity.bean.Machine;
-import com.afouquet.connexionactivity.bean.SymptomeDefaut;
-import com.afouquet.connexionactivity.bean.SymptomeObjet;
-import com.afouquet.connexionactivity.daos.DaoActivite;
-import com.afouquet.connexionactivity.daos.DaoCSOD;
-import com.afouquet.connexionactivity.daos.DaoIntervenant;
-import com.afouquet.connexionactivity.daos.DaoIntervention;
-import com.afouquet.connexionactivity.daos.DelegateAsyncTask;
+import com.afouquet.gmagroAndroid.bean.Activite;
+import com.afouquet.gmagroAndroid.bean.CauseDefaut;
+import com.afouquet.gmagroAndroid.bean.CauseObjet;
+import com.afouquet.gmagroAndroid.bean.Intervenant;
+import com.afouquet.gmagroAndroid.bean.IntervenantTps;
+import com.afouquet.gmagroAndroid.bean.Machine;
+import com.afouquet.gmagroAndroid.bean.SymptomeDefaut;
+import com.afouquet.gmagroAndroid.bean.SymptomeObjet;
+import com.afouquet.gmagroAndroid.daos.DaoActivite;
+import com.afouquet.gmagroAndroid.daos.DaoCSOD;
+import com.afouquet.gmagroAndroid.daos.DaoIntervenant;
+import com.afouquet.gmagroAndroid.daos.DaoIntervention;
+import com.afouquet.gmagroAndroid.daos.DelegateAsyncTask;
 import android.app.TimePickerDialog;
 import android.widget.TimePicker;
 

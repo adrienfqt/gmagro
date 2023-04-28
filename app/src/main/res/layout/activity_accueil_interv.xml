@@ -6,25 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".AccueilInterv">
 
-    <TextView
-        android:id="@+id/tvAccueil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="vous êtes connectés en tant que XXX"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ListView
         android:id="@+id/lvInterventionsAccueil"
-        android:layout_width="359dp"
-        android:layout_height="168dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="361dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAccueil" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonDecoAccueil"

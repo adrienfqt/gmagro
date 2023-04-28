@@ -1,4 +1,4 @@
-package com.afouquet.connexionactivity;
+package com.afouquet.gmagroAndroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 

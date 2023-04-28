@@ -1,11 +1,10 @@
-package com.afouquet.connexionactivity.daos;
+package com.afouquet.gmagroAndroid.daos;
 
-import com.afouquet.connexionactivity.bean.CauseDefaut;
-import com.afouquet.connexionactivity.bean.CauseObjet;
-import com.afouquet.connexionactivity.bean.Intervention;
-import com.afouquet.connexionactivity.bean.SymptomeDefaut;
-import com.afouquet.connexionactivity.bean.SymptomeObjet;
-import com.afouquet.connexionactivity.net.WSConnexionHTTPS;
+import com.afouquet.gmagroAndroid.bean.CauseDefaut;
+import com.afouquet.gmagroAndroid.bean.CauseObjet;
+import com.afouquet.gmagroAndroid.bean.SymptomeDefaut;
+import com.afouquet.gmagroAndroid.bean.SymptomeObjet;
+import com.afouquet.gmagroAndroid.net.WSConnexionHTTPS;
 
 import org.json.JSONArray;
 import org.json.JSONException;

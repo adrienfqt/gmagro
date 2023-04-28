@@ -1,21 +1,20 @@
-package com.afouquet.connexionactivity;
+package com.afouquet.gmagroAndroid;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.afouquet.connexionactivity.bean.Intervention;
-import com.afouquet.connexionactivity.daos.DaoIntervenant;
-import com.afouquet.connexionactivity.daos.DaoIntervention;
-import com.afouquet.connexionactivity.daos.DelegateAsyncTask;
+import com.afouquet.gmagroAndroid.bean.Intervention;
+import com.afouquet.gmagroAndroid.daos.DaoIntervenant;
+import com.afouquet.gmagroAndroid.daos.DaoIntervention;
+import com.afouquet.gmagroAndroid.daos.DelegateAsyncTask;
 
 public class AccueilInterv extends AppCompatActivity {
 

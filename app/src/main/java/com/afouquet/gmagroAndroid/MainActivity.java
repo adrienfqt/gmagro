@@ -1,4 +1,4 @@
-package com.afouquet.connexionactivity;
+package com.afouquet.gmagroAndroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afouquet.connexionactivity.daos.DaoIntervenant;
-import com.afouquet.connexionactivity.daos.DelegateAsyncTask;
+import com.afouquet.gmagroAndroid.daos.DaoIntervenant;
+import com.afouquet.gmagroAndroid.daos.DelegateAsyncTask;
 
 public class MainActivity extends AppCompatActivity {
 

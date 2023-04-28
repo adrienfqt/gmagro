@@ -1,11 +1,11 @@
-package com.afouquet.connexionactivity.bean;
+package com.afouquet.gmagroAndroid.bean;
 
-public class SymptomeDefaut {
+public class SymptomeObjet {
     private String code;
     private String libelle;
     private String uai;
 
-    public SymptomeDefaut(String code, String libelle, String uai) {
+    public SymptomeObjet(String code, String libelle, String uai) {
         this.code = code;
         this.libelle = libelle;
         this.uai = uai;
@@ -22,7 +22,6 @@ public class SymptomeDefaut {
     public String getUai() {
         return uai;
     }
-
     @Override
     public String toString() {
         return this.libelle;

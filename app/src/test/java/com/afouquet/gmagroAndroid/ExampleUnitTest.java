@@ -1,4 +1,4 @@
-package com.afouquet.connexionactivity;
+package com.afouquet.gmagroAndroid;
 
 import org.junit.Test;
 
